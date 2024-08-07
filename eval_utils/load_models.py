@@ -63,7 +63,8 @@ def load_i2t_model(engine, args=None):
         from transformers.generation import GenerationConfig
 
         tokenizer = transformers.AutoTokenizer.from_pretrained(
-            "Qwen/Qwen-VL-Chat", trust_remote_code=True
+            "Qwen/Qwen-VL-Chat", trust_remote_code=True,
+            cache_dir = "/data1/gyl/HZBank/vllm_models/qwen_vl_chat",
         )
         model = transformers.AutoModelForCausalLM.from_pretrained(
             "Qwen/Qwen-VL-Chat",
@@ -71,22 +72,27 @@ def load_i2t_model(engine, args=None):
             trust_remote_code=True,
             torch_dtype=torch.bfloat16,
             low_cpu_mem_usage=True,
+            cache_dir="/data1/gyl/HZBank/vllm_models/qwen_vl_chat",
         ).eval()
         model.generation_config = GenerationConfig.from_pretrained(
-            "Qwen/Qwen-VL-Chat", trust_remote_code=True
+            "Qwen/Qwen-VL-Chat", trust_remote_code=True,
+            cache_dir="/data1/gyl/HZBank/vllm_models/qwen_vl_chat",
         )
         processor = None
     elif engine in "qwen-vl":
         from transformers.generation import GenerationConfig
 
         tokenizer = transformers.AutoTokenizer.from_pretrained(
-            "Qwen/Qwen-VL", trust_remote_code=True
+            "Qwen/Qwen-VL", trust_remote_code=True,
+            cache_dir="/data1/gyl/HZBank/vllm_models/qwen_vl",
         )
         model = transformers.AutoModelForCausalLM.from_pretrained(
-            "Qwen/Qwen-VL", device_map="cuda", trust_remote_code=True
+            "Qwen/Qwen-VL", device_map="cuda", trust_remote_code=True,
+            cache_dir="/data1/gyl/HZBank/vllm_models/qwen_vl",
         ).eval()
         model.generation_config = GenerationConfig.from_pretrained(
-            "Qwen/Qwen-VL", trust_remote_code=True
+            "Qwen/Qwen-VL", trust_remote_code=True,
+            cache_dir="/data1/gyl/HZBank/vllm_models/qwen_vl_chat",
         )
         processor = None
     elif engine == "internlm-x2":
